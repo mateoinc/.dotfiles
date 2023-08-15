@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+*.log
+tmp/
+# We since we don't show untracked files in our config alias, we don't need much in gitignore
+# However, we do want to avoid recursion problems.
+.dotfiles
