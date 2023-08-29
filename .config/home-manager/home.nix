@@ -52,16 +52,6 @@
     # '')
     atool
     black # py
-    catppuccin-gtk # theme for gnome
-    (catppuccin-gtk.override {
-      accents = [
-        "mauve"
-      ]; # You can specify multiple accents here to output multiple themes
-      size = "standard";
-      # tweaks =
-      # [ "rimless" "black" ]; # You can also specify multiple tweaks here
-      variant = "frappe";
-    })
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
@@ -87,6 +77,7 @@
     gnome.gnome-themes-extra
     graphviz # graphs (org roam)
     httpie
+    hugo # website engine
     hunspell # spel check for libreoffice
     imagemagick
     isync # email syncing
@@ -109,7 +100,7 @@
     passff-host # bridge to pass firefox
     (pcmanfm.override { withGtk3 = true; }) # file browser
     pinentry # ask for passwords graphically
-    pueue
+    pueue # process queue
     playerctl
     python310
     ripgrep # Doom emacs dep
@@ -118,13 +109,13 @@
     sioyek # pdf viewer focused on research
     scrot
     slock
-    spotify
+    spotify # music
     sqlite # Doom emacs dep (lookup)
     texlive.combined.scheme-full # LaTeX
     tlp
     upower
     vlc # Video/Audio player
-    vim
+    vim # fallback text editor
     wineWowPackages.stable # Wine 32 n 64 bit
     wordnet # Doom emacs dep (lookup)
     xclip
