@@ -65,7 +65,7 @@
     })
     dropbox-cli
     fira-code # font with ligatures
-    firefox
+    (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
     fd # find
     gcc # cpp compiler
     git # version contol
@@ -99,7 +99,7 @@
     pass # password manager
     passff-host # bridge to pass firefox
     (pcmanfm.override { withGtk3 = true; }) # file browser
-    pinentry # ask for passwords graphically
+    pinentry-qt # ask for passwords graphically
     pueue # process queue
     playerctl
     python310
