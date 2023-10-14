@@ -182,7 +182,7 @@ in {
     multimarkdown
     playerctl
     # (python310.withPackages my-python-packages)
-    python310
+    python311
     scrot
     slock
     tlp

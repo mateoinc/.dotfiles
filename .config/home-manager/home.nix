@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
-
-{
+let
+  my-python-packages = ps:
+    with ps; [
+      numpy # Math
+      matplotlib # Graphs
+      scipy # Science
+      python-lsp-server # language server protocol
+      jupyter-core # notebook
+      jupyter
+    ];
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mbarria";
@@ -85,6 +94,7 @@
     ispell
     jdk11 # Java
     julia # language
+    # jupyter # python notebook
     ledger # money management
     libreoffice-qt # word processor, calc, presentations, etc
     libtool
@@ -102,7 +112,8 @@
     pinentry-qt # ask for passwords graphically
     pueue # process queue
     playerctl
-    python310
+    # python311
+    (python310.withPackages my-python-packages)
     ripgrep # Doom emacs dep
     shellcheck # sh
     shfmt # sh
@@ -110,6 +121,7 @@
     scrot
     slock
     spotify # music
+    stdenv.cc.cc.lib # libstd++ (added for pyls)
     sqlite # Doom emacs dep (lookup)
     texlive.combined.scheme-full # LaTeX
     tlp
