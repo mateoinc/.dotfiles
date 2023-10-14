@@ -97,7 +97,9 @@ in {
     # jupyter # python notebook
     ledger # money management
     libreoffice-qt # word processor, calc, presentations, etc
+    libsForQt5.dolphin
     libtool
+    lxappearance # gtk theming
     maim # screenshots
     multimarkdown
     mu # email viewer
@@ -108,7 +110,6 @@ in {
     obs-studio # screen recording
     pass # password manager
     passff-host # bridge to pass firefox
-    (pcmanfm.override { withGtk3 = true; }) # file browser
     pinentry-qt # ask for passwords graphically
     pueue # process queue
     playerctl
@@ -134,7 +135,19 @@ in {
     wget
     wl-clipboard # for images in emacs
   ];
-
+  # theming
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Catppuccin-Frappe-Compact-Mauve-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        accents = [ "mauve" ];
+        size = "compact";
+        tweaks = [ "rimless" "black" ];
+        variant = "frappe";
+      };
+    };
+  };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {

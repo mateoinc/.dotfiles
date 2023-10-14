@@ -48,7 +48,8 @@ in {
   # Docker
   virtualisation.docker.enable = true;
   # dconf
-  programs.dconf.enable = true;
+  programs.dconf = { enable = true; };
+
   # Kernel
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_1;
@@ -148,7 +149,7 @@ in {
     arandr
     brightnessctl
     cmake
-    catppuccin-gtk # theme for gnome
+    # catppuccin-gtk # theme for gnome
     (catppuccin-gtk.override {
       accents = [
         "mauve"
