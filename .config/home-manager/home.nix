@@ -99,6 +99,7 @@ in {
     libreoffice-qt # word processor, calc, presentations, etc
     libsForQt5.dolphin
     libtool
+    lua54Packages.digestif # lsp server for LaTeX
     lxappearance # gtk theming
     maim # screenshots
     multimarkdown
