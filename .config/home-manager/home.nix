@@ -61,18 +61,16 @@ in {
     # '')
     atool
     black # py
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
     calibre # ebook management
     chromium # in case firefox doesn't work
+    betterdiscordctl
+    discord
+    dropbox-cli
     # emacs # yes
     (emacs.override {
       withXwidgets = true;
       withPgtk = true;
     })
-    dropbox-cli
     fira-code # font with ligatures
     (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
     fd # find
@@ -116,6 +114,7 @@ in {
     playerctl
     # python311
     (python310.withPackages my-python-packages)
+    protonvpn-gui
     ripgrep # Doom emacs dep
     shellcheck # sh
     shfmt # sh
