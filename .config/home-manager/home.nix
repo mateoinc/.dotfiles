@@ -122,7 +122,8 @@ in {
     spotify # music
     stdenv.cc.cc.lib # libstd++ (added for pyls)
     sqlite # Doom emacs dep (lookup)
-    texlive.combined.scheme-full # LaTeX
+    # texlive.combined.scheme-full # LaTeX
+    texliveFull
     tlp
     upower
     vlc # Video/Audio player
