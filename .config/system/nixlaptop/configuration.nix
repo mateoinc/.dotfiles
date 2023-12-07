@@ -61,6 +61,7 @@ in {
     libinput.enable = true;
     # Configure keymap in X11
     layout = "us, es";
+    xkbVariant = "intl";
     xkbOptions = "grp:win_space_toggle";
     # Display Manager
     displayManager = {
@@ -245,7 +246,7 @@ in {
 
   # Dropbox as a service
   networking.firewall = {
-    allowedTCPPorts = [ 17500 ];
+    allowedTCPPorts = [ 17500 30000 ];
     allowedUDPPorts = [ 17500 ];
   };
 
