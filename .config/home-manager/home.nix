@@ -70,7 +70,7 @@ in {
       withPgtk = true;
     })
     fira-code # font with ligatures
-    (firefox.override { extraNativeMessagingHosts = [ passff-host ]; })
+    (firefox.override { nativeMessagingHosts = [ passff-host ]; })
     fd # find
     gcc # cpp compiler
     git # version contol
