@@ -61,9 +61,10 @@ in {
     # '')
     atool
     black # py
-    calibre # ebook management
-    chromium # in case firefox doesn't work
     betterdiscordctl
+    calibre # ebook management
+    celeste # rclone powered cloud sync
+    chromium # in case firefox doesn't work
     discord
     dropbox-cli
     # emacs # yes
