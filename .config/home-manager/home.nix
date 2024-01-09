@@ -76,6 +76,7 @@ in {
     fira-code # font with ligatures
     (firefox.override { nativeMessagingHosts = [ passff-host ]; })
     fd # find
+    floorp-unwrapped # firefox-based browser
     gcc # cpp compiler
     git # version contol
     gimp # image editor
