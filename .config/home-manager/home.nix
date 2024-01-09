@@ -6,8 +6,10 @@ let
       matplotlib # Graphs
       scipy # Science
       python-lsp-server # language server protocol
+      pip
     ];
 in {
+  imports = [ ./alien.nix ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "mbarria";
@@ -181,7 +183,6 @@ in {
   programs.bash = {
     enable = true;
     initExtra = ''
-
       if [ -f $HOME/.config/bash/.bashrc ];
       then
         source $HOME/.config/bash/.bashrc
