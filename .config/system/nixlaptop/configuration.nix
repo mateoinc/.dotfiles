@@ -244,6 +244,10 @@ in {
       atomix # puzzle game
     ]);
 
+  # Make systemd see my programs
+  systemd.user.extraConfig = ''
+    DefaultEnvironment="PATH=/home/mbarria/.nix-profile/bin:/run/current-system/sw/bin"
+  '';
   # Dropbox as a service
   networking.firewall = {
     allowedTCPPorts = [ 17500 30000 ];
