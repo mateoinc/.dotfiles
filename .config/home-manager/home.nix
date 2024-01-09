@@ -67,6 +67,7 @@ in {
     chromium # in case firefox doesn't work
     discord
     dropbox-cli
+    evince
     # emacs # yes
     (emacs.override {
       withXwidgets = true;
@@ -107,9 +108,11 @@ in {
     nixfmt
     nodejs
     nodejs
+    okular # pdf
     obs-studio # screen recording
     pass # password manager
     passff-host # bridge to pass firefox
+    pdfpc # pdf
     pinentry-qt # ask for passwords graphically
     pueue # process queue
     playerctl
