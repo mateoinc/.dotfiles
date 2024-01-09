@@ -90,6 +90,7 @@ in {
     hugo # website engine
     hunspell # spel check for libreoffice
     imagemagick
+    inkscape-with-extensions # vector graphics
     isync # email syncing
     isort
     ispell
