@@ -133,7 +133,7 @@ in {
     stdenv.cc.cc.lib # libstd++ (added for pyls)
     sqlite # Doom emacs dep (lookup)
     # texlive.combined.scheme-full # LaTeX
-    texliveFull
+    texliveFull # LaTeX
     tlp
     upower
     vlc # Video/Audio player
@@ -200,10 +200,9 @@ in {
     enable = true;
     shellInit = ''
 
-      if test -f $HOME/.config/fish/config.base.fish;
-      then
+      if test -f $HOME/.config/fish/config.base.fish
         source $HOME/.config/fish/config.base.fish
-      fi
+      end
     '';
   };
   programs.zsh = {
