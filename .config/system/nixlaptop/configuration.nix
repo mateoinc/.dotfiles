@@ -49,6 +49,8 @@ in {
   virtualisation.docker.enable = true;
   # dconf
   programs.dconf = { enable = true; };
+  # fish
+  programs.fish.enable = true;
 
   # Kernel
   #boot.kernelPackages = pkgs.linuxPackages_latest;
