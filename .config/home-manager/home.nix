@@ -141,6 +141,7 @@ in {
     wineWowPackages.stable # Wine 32 n 64 bit
     wordnet # Doom emacs dep (lookup)
     xclip
+    wezterm # term emulator + multiplexer
     wget
     wl-clipboard # for images in emacs
   ];
