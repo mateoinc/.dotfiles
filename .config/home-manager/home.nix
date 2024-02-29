@@ -66,7 +66,7 @@ in {
     celeste # rclone powered cloud sync
     chromium # in case firefox doesn't work
     discord
-    dropbox-cli
+    # dropbox-cli
     evince
     # emacs # yes
     (emacs.override {
@@ -120,9 +120,10 @@ in {
     playerctl
     # python311
     (python310.withPackages my-python-packages)
-    protonvpn-gui
+    protonvpn-gui # vpn
+    protontricks # make games run better
     ripgrep # Doom emacs dep
-    rclone
+    rclone # cloud sync
     shellcheck # sh
     shfmt # sh
     sioyek # pdf viewer focused on research
