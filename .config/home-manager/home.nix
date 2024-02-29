@@ -109,10 +109,10 @@ in {
     nerdfonts
     nixfmt
     nodejs
-    nodejs
     okular # pdf
     obs-studio # screen recording
-    pass # password manager
+    # pass # password manager
+    (pass.withExtensions (ext: with ext; [ pass-update pass-otp pass-audit ]))
     passff-host # bridge to pass firefox
     pdfpc # pdf
     pinentry-qt # ask for passwords graphically
