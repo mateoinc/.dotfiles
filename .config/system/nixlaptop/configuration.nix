@@ -162,7 +162,6 @@ in {
       # [ "rimless" "black" ]; # You can also specify multiple tweaks here
       variant = "frappe";
     })
-    dropbox-cli
     droidcam # use phone as webcam
     editorconfig-core-c
     # emacs # yes
@@ -250,31 +249,31 @@ in {
   systemd.user.extraConfig = ''
     DefaultEnvironment="PATH=/home/mbarria/.nix-profile/bin:/run/current-system/sw/bin"
   '';
-  # Dropbox as a service
-  networking.firewall = {
-    allowedTCPPorts = [ 17500 30000 ];
-    allowedUDPPorts = [ 17500 ];
-  };
+  # # Dropbox as a service
+  # networking.firewall = {
+  #   allowedTCPPorts = [ 17500 30000 ];
+  #   allowedUDPPorts = [ 17500 ];
+  # };
 
-  systemd.user.services.dropbox = {
-    description = "Dropbox";
-    wantedBy = [ "graphical-session.target" ];
-    environment = {
-      QT_PLUGIN_PATH = "/run/current-system/sw/"
-        + pkgs.qt5.qtbase.qtPluginPrefix;
-      QML2_IMPORT_PATH = "/run/current-system/sw/"
-        + pkgs.qt5.qtbase.qtQmlPrefix;
-    };
-    serviceConfig = {
-      ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
-      ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
-      KillMode = "control-group"; # upstream recommends process
-      Restart = "on-failure";
-      PrivateTmp = true;
-      ProtectSystem = "full";
-      Nice = 10;
-    };
-  };
+  # systemd.user.services.dropbox = {
+  #   description = "Dropbox";
+  #   wantedBy = [ "graphical-session.target" ];
+  #   environment = {
+  #     QT_PLUGIN_PATH = "/run/current-system/sw/"
+  #       + pkgs.qt5.qtbase.qtPluginPrefix;
+  #     QML2_IMPORT_PATH = "/run/current-system/sw/"
+  #       + pkgs.qt5.qtbase.qtQmlPrefix;
+  #   };
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.dropbox.out}/bin/dropbox";
+  #     ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+  #     KillMode = "control-group"; # upstream recommends process
+  #     Restart = "on-failure";
+  #     PrivateTmp = true;
+  #     ProtectSystem = "full";
+  #     Nice = 10;
+  #   };
+  # };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
