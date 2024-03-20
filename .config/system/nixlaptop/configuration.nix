@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ libs, config, pkgs, ... }:
+{ libs, config, pkgs, home-manager, ... }:
 
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -15,7 +15,7 @@ let
 in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    <home-manager/nixos>
+    # <home-manager/nixos>
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -39,7 +39,7 @@ in {
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -56,30 +56,31 @@ in {
   #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_6_1;
 
+  ## X Config
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
     # Configure keymap in X11
-    layout = "us, es";
-    xkbVariant = "intl";
-    xkbOptions = "grp:win_space_toggle";
+    xkb.layout = "us, es";
+    xkb.variant = "intl";
+    xkb.options = "grp:win_space_toggle";
     # Display Manager
     displayManager = {
       gdm.enable = true; # gnome
       # sddm.enable = true;
+      # sddm.theme = "catppuccin-sddm-corners";
       # defaultSession = "none+exwm";
       defaultSession = "gnome";
     };
-    # Gnome in case of emergency
     desktopManager.gnome.enable = true;
     # EXWM
-    windowManager.exwm = {
-      enable = true;
-      enableDefaultConfig = false;
-      loadScript = "(exwm-enable)";
-    };
+    #   windowManager.exwm = {
+    #     enable = true;
+    #     enableDefaultConfig = false;
+    #     loadScript = "(exwm-enable)";
+    #   };
   };
   # Emacs
   # services.emacs.enable = true;
@@ -87,6 +88,7 @@ in {
     (import (builtins.fetchTarball {
       url =
         "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+      sha256 = "sha256:1x02xlyq50p3jsc2k2si4h4fab9gn0mldvnfxfvxgbcdxp9c4w0d";
     }))
   ];
   # Nvidia Drivers
@@ -113,10 +115,6 @@ in {
     # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
     nvidiaBusId = "PCI:3:0:0";
   };
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -124,12 +122,26 @@ in {
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
+  # Remove sound.enable or set it to false if you had it set previously, as sound.enable is only meant for ALSA-based configurations
+  # rtkit is optional but recommended
+  # security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  #   # If you want to use JACK applications, uncomment this
+  #   #jack.enable = true;
+  # };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mbarria = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "docker" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "docker"
+      "networkmanager"
+      "plugdev"
+    ]; # Enable ‘sudo’ for the user.
   };
   # Allow it to edit nix
   nix.settings.allowed-users = [ "@wheel" ];
@@ -153,15 +165,15 @@ in {
     brightnessctl
     cmake
     # catppuccin-gtk # theme for gnome
-    (catppuccin-gtk.override {
-      accents = [
-        "mauve"
-      ]; # You can specify multiple accents here to output multiple themes
-      size = "standard";
-      # tweaks =
-      # [ "rimless" "black" ]; # You can also specify multiple tweaks here
-      variant = "frappe";
-    })
+    # (catppuccin-gtk.override {
+    #   accents = [
+    #     "mauve"
+    #   ]; # You can specify multiple accents here to output multiple themes
+    #   size = "standard";
+    #   # tweaks =
+    #   # [ "rimless" "black" ]; # You can also specify multiple tweaks here
+    #   variant = "frappe";
+    # })
     droidcam # use phone as webcam
     editorconfig-core-c
     # emacs # yes
@@ -173,6 +185,7 @@ in {
     nvidia-offload
     feh
     gcc # cpp compiler
+    glibcLocales # started having issues with locales, no clue why
     git # version contol
     gnumake
     gnupg # encryption
@@ -184,14 +197,16 @@ in {
     maim # screenshots
     multimarkdown
     playerctl
+    pueue # process queue
     # (python310.withPackages my-python-packages)
-    python311
+    # python311
     scrot
     slock
     tlp
     upower
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    wezterm # terminal emulator
     xdotool
     xorg.xdpyinfo
     xorg.xev
@@ -199,6 +214,21 @@ in {
     xorg.xinit
     xorg.xmodmap
     xorg.xwininfo
+    # hyprland/wayland
+    # waybar # bar
+    # dunst # notifications
+    # rofi-wayland # app launcher
+    # swww # wallpaper
+    # networkmanagerapplet
+    # flameshot # screenshots
+    # hyprkeys # extract keys
+    # copyq # clipboard
+    # xdg-desktop-portal-hyprland
+    # catppuccin-sddm-corners # sddm theme
+    # wireplumber # audio control
+    # ## Only on unstable as of 04/03/2024
+    # hyprlock # lockscreen
+    # hypridle # idle daemon
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -233,7 +263,7 @@ in {
       # cheese # webcam tool
       gnome-music
       gnome-terminal
-      gedit # text editor
+      pkgs.gedit # text editor
       epiphany # web browser
       geary # email reader
       evince # document viewer
@@ -249,6 +279,26 @@ in {
   systemd.user.extraConfig = ''
     DefaultEnvironment="PATH=/home/mbarria/.nix-profile/bin:/run/current-system/sw/bin"
   '';
+
+  ## Services
+  systemd.services = {
+    # pueue
+    pueued = {
+      description = "Pueue Daemon";
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        User = "mbarria";
+        ExecStart = "${pkgs.pueue}/bin/pueued -vv";
+      };
+    };
+  };
+
+  # VPN
+  services.openvpn.servers = {
+    uss = {
+      config = "config /home/mbarria/.config/vpn/uss/clientconfig.ovpn ";
+    };
+  };
   # # Dropbox as a service
   # networking.firewall = {
   #   allowedTCPPorts = [ 17500 30000 ];
@@ -274,6 +324,33 @@ in {
   #     Nice = 10;
   #   };
   # };
+  # udev rules
+  services.udev.extraRules = ''
+    # Rules for Oryx web flashing and live training
+    KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="plugdev"
+    KERNEL=="hidraw*", ATTRS{idVendor}=="3297", MODE="0664", GROUP="plugdev"
+
+    # Legacy rules for live training over webusb (Not needed for firmware v21+)
+      # Rule for all ZSA keyboards
+      SUBSYSTEM=="usb", ATTR{idVendor}=="3297", GROUP="plugdev"
+      # Rule for the Moonlander
+      SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", GROUP="plugdev"
+      # Rule for the Ergodox EZ
+      SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="1307", GROUP="plugdev"
+      # Rule for the Planck EZ
+      SUBSYSTEM=="usb", ATTR{idVendor}=="feed", ATTR{idProduct}=="6060", GROUP="plugdev"
+
+    # Wally Flashing rules for the Ergodox EZ
+    ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", ENV{ID_MM_DEVICE_IGNORE}="1"
+    ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789A]?", ENV{MTP_NO_PROBE}="1"
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789ABCD]?", MODE:="0666"
+    KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:="0666"
+
+    # Keymapp / Wally Flashing rules for the Moonlander and Planck EZ
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", MODE:="0666", SYMLINK+="stm32_dfu"
+    # Keymapp Flashing rules for the Voyager
+    SUBSYSTEMS=="usb", ATTRS{idVendor}=="3297", MODE:="0666", SYMLINK+="ignition_dfu"
+  '';
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

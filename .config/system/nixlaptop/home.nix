@@ -20,17 +20,6 @@ in {
   xdg.mime.enable = true;
   xdg.systemDirs.data =
     [ "${config.home.homeDirectory}/.nix-profile/share/applications" ];
-  # home.activation = {
-  #   linkDesktopApplications = {
-  #     after = [ "writeBoundary" "createXdgUserDirectories" ];
-  #     before = [ ];
-  #     data = ''
-  #       rm -rf ${config.xdg.dataHome}/"applications/home-manager"
-  #       mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
-  #       cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
-  #     '';
-  #   };
-  # };
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -63,9 +52,11 @@ in {
     black # py
     betterdiscordctl
     calibre # ebook management
-    catppuccin-gtk # theme
+    carapace # better shell completions
+    # catppuccin-gtk # theme
     celeste # rclone powered cloud sync
     chromium # in case firefox doesn't work
+    clang-tools # working with C
     discord
     # dropbox-cli
     evince
@@ -95,8 +86,9 @@ in {
     # jupyter # python notebook
     ledger # money management
     libreoffice-qt # word processor, calc, presentations, etc
-    libsForQt5.dolphin
+    libsForQt5.dolphin # file manager
     libtool
+    libxml2 # data formatting
     # lua54Packages.digestif # lsp server for LaTeX
     lxappearance # gtk theming
     maim # screenshots
@@ -104,15 +96,18 @@ in {
     mu # email viewer
     nerdfonts
     nixfmt
+    nil # lsp
     nodejs
+    oh-my-posh # shell theme
     okular # pdf
     obs-studio # screen recording
+    pandoc # universal document converter
     # pass # password manager
     (pass.withExtensions (ext: with ext; [ pass-update pass-otp pass-audit ]))
     passff-host # bridge to pass firefox
     pdfpc # pdf
     pinentry-qt # ask for passwords graphically
-    pueue # process queue
+    # pueue # process queue
     playerctl
     # python311
     (python311.withPackages my-python-packages)
@@ -130,6 +125,7 @@ in {
     sqlite # Doom emacs dep (lookup)
     # texlive.combined.scheme-full # LaTeX
     texliveFull # LaTeX
+    thefuck # command typo fixer
     tlp
     upower
     vlc # Video/Audio player
@@ -144,27 +140,27 @@ in {
   # emacs server
   services.emacs.enable = true;
   # theming
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Frappe-Compact-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "mauve" ];
-        size = "compact";
-        tweaks = [ "rimless" "black" ];
-        variant = "frappe";
-      };
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "Catppuccin-Frappe-Compact-Mauve-Dark";
+  #     package = pkgs.catppuccin-gtk.override {
+  #       accents = [ "mauve" ];
+  #       size = "compact";
+  #       tweaks = [ "rimless" "black" ];
+  #       variant = "frappe";
+  #     };
+  #   };
+  # };
   # Symlink theme
-  xdg.configFile = {
-    "gtk-4.0/assets".source =
-      "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
-    "gtk-4.0/gtk.css".source =
-      "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
-    "gtk-4.0/gtk-dark.css".source =
-      "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
-  };
+  # xdg.configFile = {
+  #   "gtk-4.0/assets".source =
+  #     "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
+  #   "gtk-4.0/gtk.css".source =
+  #     "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk.css";
+  #   "gtk-4.0/gtk-dark.css".source =
+  #     "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/gtk-dark.css";
+  # };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -214,6 +210,9 @@ in {
     '';
   };
   programs.nushell = { enable = true; };
+
+  # Systemd services
+
   # programs.zsh = {
   #   enable = true;
   #   initExtra = ''
