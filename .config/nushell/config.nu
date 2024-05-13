@@ -911,6 +911,12 @@ let external_completer = {|spans|
 $env.config.completions.external = {
     enable: true
     max_results: 100
-    completer: $external_completer
+    # completer: $external_completer
+    completer: $fish_completer
 }
+
+# Emacs as editor
+$env.EDITOR = "emacsclient -t"                  # $EDITOR opens in terminal
+$env.VISUAL = "emacsclient -c -a emacs"         # $VISUAL opens in GUI mode
+
 source ~/.cache/carapace/init.nu
