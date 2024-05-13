@@ -72,17 +72,21 @@ in {
     gnupg # encryption
     gnome.gnome-settings-daemon
     gnome.gnome-themes-extra
+    gnomeExtensions.bluetooth-battery
+    gnomeExtensions.appindicator
     graphviz # graphs (org roam)
     httpie
     hugo # website engine
     hunspell # spel check for libreoffice
+    hunspellDicts.en_US # hunspell dictionary
+    hunspellDicts.es_CL # hunspell dictionary
     imagemagick
     inkscape-with-extensions # vector graphics
     isync # email syncing
     isort
     ispell # spellcheck
     jdk11 # Java
-    julia # language
+    julia-bin # language
     # jupyter # python notebook
     ledger # money management
     libreoffice-qt # word processor, calc, presentations, etc
@@ -122,11 +126,14 @@ in {
     slock
     spotify # music
     stdenv.cc.cc.lib # libstd++ (added for pyls)
+    soulseekqt
     sqlite # Doom emacs dep (lookup)
     # texlive.combined.scheme-full # LaTeX
+    tetrio-desktop
     texliveFull # LaTeX
     thefuck # command typo fixer
     tlp
+    tridactyl-native # vim for firefox
     upower
     vlc # Video/Audio player
     vim # fallback text editor
@@ -136,9 +143,12 @@ in {
     wezterm # term emulator + multiplexer
     wget
     wl-clipboard # for images in emacs
+    xbindkeys # keybinds
+    zip # zip and unzip; required to export org to ODT
   ];
   # emacs server
   services.emacs.enable = true;
+  home.sessionVariables = { EDITOR = "${pkgs.emacs}/bin/emacsclient -t"; };
   # theming
   # gtk = {
   #   enable = true;
@@ -186,7 +196,6 @@ in {
   #  /etc/profiles/per-user/mbarria/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = { EDITOR = "emacs"; };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
