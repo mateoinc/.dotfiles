@@ -853,6 +853,12 @@ $env.PATH = ($env.PATH |
 $env.PATH = ($env.PATH | uniq)
 # aliases
 alias dotfiles = git $'--git-dir=($env.HOME)/.dotfiles/' $'--work-tree=($env.HOME)'
+alias mount_don = sshfs donelias-remote:/home/mbarria ~/Fuse/don-elias/ -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,default_permissions,uid=1000,gid=100
+alias unmount_don = fusermount -zu ~/Fuse/don-elias
+alias donelias = ssh -t donelias-remote ("cd " + (pwd | str replace "Fuse/don-elias" "")  + "; exec $SHELL -l")
+
+alias mount_graph = sshfs donelias-remote:/home/jgarate/Graphene ~/Fuse/Graphene/ -o reconnect,ServerAliveInterval=15,ServerAliveCountMax=3,default_permissions,uid=1000,gid=100
+alias unmount_graph = fusermount -zu ~/Fuse/Graphene
 
 
 # completers
