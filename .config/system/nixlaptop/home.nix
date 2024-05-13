@@ -75,6 +75,7 @@ in {
     gnomeExtensions.bluetooth-battery
     gnomeExtensions.appindicator
     graphviz # graphs (org roam)
+    gr-framework # graphics (julia)
     httpie
     hugo # website engine
     hunspell # spel check for libreoffice
