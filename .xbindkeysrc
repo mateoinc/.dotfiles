@@ -43,6 +43,36 @@
 "emacsclient --eval '(emacs-everywhere)'"
   control+shift+alt + e
 
+"nautilus"
+  control+shift+alt+mod4 + f
+
+"wezterm"
+  control+shift+alt+mod4 + t
+
+"firefox"
+  control+shift+alt+mod4 + w
+
+"chromium"
+  control+shift+alt + w
+
+"spotify"
+  control+shift+alt+mod4 + s
+
+"discord"
+  control+shift+alt+mod4 + d
+
+"gnome-calculator"
+  control+shift+alt+mod4 + c
+
+"obs"
+  control+shift+alt+mod4 + o
+
+"gimp"
+  control+shift+alt+mod4 + i
+
+"inkscape"
+  control+shift+alt + i
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
