@@ -64,7 +64,7 @@ in {
     libinput.enable = true;
     # Configure keymap in X11
     xkb.layout = "us, es";
-    xkb.variant = "intl";
+    xkb.variant = "altgr-intl";
     xkb.options = "grp:win_space_toggle";
     # Display Manager
     displayManager = {
@@ -88,7 +88,7 @@ in {
     (import (builtins.fetchTarball {
       url =
         "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "sha256:1x02xlyq50p3jsc2k2si4h4fab9gn0mldvnfxfvxgbcdxp9c4w0d";
+      sha256 = "sha256:0lhx2fkf8q56wsaywahjfyxzrnarbm8zjwzcrlc0i7klq3j4c2dq";
     }))
   ];
   # Nvidia Drivers
@@ -122,6 +122,10 @@ in {
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  # Bluetooth battery
+  hardware.bluetooth.settings = {
+    General = { Experimental-Features = true; };
+  };
   # Remove sound.enable or set it to false if you had it set previously, as sound.enable is only meant for ALSA-based configurations
   # rtkit is optional but recommended
   # security.rtkit.enable = true;
@@ -190,6 +194,7 @@ in {
     gnumake
     gnupg # encryption
     gtk3
+    gtk4
     gtk-engine-murrine # for installing gnome themes
     i3lock-fancy
     isort
@@ -325,6 +330,7 @@ in {
   #   };
   # };
   # udev rules
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   services.udev.extraRules = ''
     # Rules for Oryx web flashing and live training
     KERNEL=="hidraw*", ATTRS{idVendor}=="16c0", MODE="0664", GROUP="plugdev"
