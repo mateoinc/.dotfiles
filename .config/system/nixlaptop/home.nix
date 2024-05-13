@@ -107,8 +107,16 @@ in {
     okular # pdf
     obs-studio # screen recording
     pandoc # universal document converter
-    # pass # password manager
-    (pass.withExtensions (ext: with ext; [ pass-update pass-otp pass-audit ]))
+    # pass
+    (pass.withExtensions (ext: # password manager
+      with ext; [
+        pass-otp # One time passwords
+        pass-update # Easily change a password
+        pass-import # import from firefox, chrome, other managers, etc
+        pass-file # add files
+        # pass-audit # check Have I been pwned? and the like
+        pass-genphrase # memorable passwords
+      ]))
     passff-host # bridge to pass firefox
     pdfpc # pdf
     pinentry-qt # ask for passwords graphically
