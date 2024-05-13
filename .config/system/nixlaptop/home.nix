@@ -157,6 +157,11 @@ in {
     zip # zip and unzip; required to export org to ODT
   ];
   # emacs server
+  programs.emacs.enable = true;
+  services.emacs.package = (pkgs.emacs.override {
+    withXwidgets = true;
+    withPgtk = true;
+  });
   services.emacs.enable = true;
   home.sessionVariables = { EDITOR = "${pkgs.emacs}/bin/emacsclient -t"; };
   # theming
