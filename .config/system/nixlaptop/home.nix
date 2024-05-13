@@ -57,9 +57,9 @@ in {
     celeste # rclone powered cloud sync
     chromium # in case firefox doesn't work
     clang-tools # working with C
-    discord
+    discord # chat
     # dropbox-cli
-    evince
+    evince # pdf reader
     fira-code # font with ligatures
     (firefox.override { nativeMessagingHosts = [ passff-host ]; })
     fd # find
@@ -80,7 +80,7 @@ in {
     inkscape-with-extensions # vector graphics
     isync # email syncing
     isort
-    ispell
+    ispell # spellcheck
     jdk11 # Java
     julia # language
     # jupyter # python notebook
@@ -94,8 +94,8 @@ in {
     maim # screenshots
     multimarkdown
     mu # email viewer
-    nerdfonts
-    nixfmt
+    nerdfonts # iconic fonts
+    nixfmt # formatting tool for Nix
     nil # lsp
     nodejs
     oh-my-posh # shell theme
