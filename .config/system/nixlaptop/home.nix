@@ -122,6 +122,7 @@ in {
     pinentry-qt # ask for passwords graphically
     # pueue # process queue
     playerctl
+    plover.dev
     # python311
     (python311.withPackages my-python-packages)
     protonvpn-gui # vpn
