@@ -4,7 +4,7 @@ Host imap.gmail.com
 SSLType IMAPS
 AuthMechs LOGIN
 User mateobarria@gmail.com
-PassCmd "pass gmail_apppass/mateobarria@gmail.com"
+PassCmd "pass Email/gmail_appass"
 
 MaildirStore gmail-local
 Path ~/Mail/gmail/
